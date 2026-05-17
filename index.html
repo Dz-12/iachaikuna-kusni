@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iachaikuna Kusni – Café de los Sabios</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cafe-negro: #1a0f08;
+    --cafe-oscuro: #2d1810;
+    --cafe-medio: #5c3317;
+    --cafe-dorado: #8b5a2b;
+    --cafe-claro: #c8956c;
+    --crema: #f5e6d3;
+    --crema-suave: #fdf6ee;
+    --dorado: #c9a227;
+    --dorado-claro: #e8c547;
+    --verde-inga: #2d4a2d;
+    --verde-suave: #4a6741;
+    --tierra: #8b6914;
+    --blanco-calido: #fefaf4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Crimson Pro', serif;
+    background: var(--blanco-calido);
+    color: var(--cafe-negro);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(26,15,8,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,162,39,0.2);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    transition: all 0.3s ease;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .nav-logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .nav-logo-text span:first-child {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--dorado);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-logo-text span:last-child {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    color: var(--crema);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-style: italic;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--crema);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--dorado);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--dorado); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: var(--dorado);
+    color: var(--cafe-negro) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 2px;
+    font-weight: 500;
+    transition: background 0.3s !important;
+  }
+
+  .nav-cta:hover { background: var(--dorado-claro) !important; }
+  .nav-cta::after { display: none !important; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 5px;
+  }
+
+  .hamburger span {
+    width: 25px;
+    height: 2px;
+    background: var(--crema);
+    transition: all 0.3s;
+  }
+
+  /* ── HERO ── */
+  #inicio {
+    height: 100vh;
+    min-height: 600px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(92,51,23,0.4) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(45,74,45,0.3) 0%, transparent 50%),
+      linear-gradient(135deg, #1a0f08 0%, #2d1810 40%, #1a2a1a 100%);
+  }
+
+  /* Organic texture overlay */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 25% 75%, rgba(201,162,39,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 75% 25%, rgba(201,162,39,0.06) 0%, transparent 35%);
+  }
+
+  /* Decorative coffee rings */
+  .hero-rings {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    height: 420px;
+    opacity: 0.12;
+  }
+
+  .hero-rings circle {
+    fill: none;
+    stroke: var(--dorado);
+    animation: rotateRing 20s linear infinite;
+    transform-origin: center;
+  }
+
+  .hero-rings circle:nth-child(2) { animation-duration: 28s; animation-direction: reverse; }
+  .hero-rings circle:nth-child(3) { animation-duration: 35s; }
+
+  @keyframes rotateRing {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Grain texture */
+  .grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 2rem;
+    max-width: 800px;
+    animation: heroFadeIn 1.2s ease forwards;
+  }
+
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    animation: heroFadeIn 1.2s 0.2s both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    color: var(--crema);
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    animation: heroFadeIn 1.2s 0.3s both;
+  }
+
+  .hero-title em {
+    color: var(--dorado);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.95rem, 2.5vw, 1.3rem);
+    color: rgba(245,230,211,0.75);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: heroFadeIn 1.2s 0.4s both;
+  }
+
+  .hero-divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+    margin: 0 auto 2rem;
+    animation: heroFadeIn 1.2s 0.5s both;
+  }
+
+  .hero-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--crema);
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    animation: heroFadeIn 1.2s 0.6s both;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: heroFadeIn 1.2s 0.8s both;
+  }
+
+  .btn-primary {
+    background: var(--dorado);
+    color: var(--cafe-negro);
+    padding: 0.9rem 2.2rem;
+    border: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-primary:hover::before { left: 100%; }
+  .btn-primary:hover { background: var(--dorado-claro); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,162,39,0.35); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--crema);
+    padding: 0.9rem 2.2rem;
+    border: 1px solid rgba(245,230,211,0.4);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover { border-color: var(--dorado); color: var(--dorado); transform: translateY(-2px); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(245,230,211,0.5);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+
+  .hero-scroll span { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(245,230,211,0.5), transparent); }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 6rem 2rem; }
+
+  .section-container { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--dorado);
+    font-style: italic;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--cafe-negro);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--cafe-dorado); }
+
+  .section-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--dorado);
+    margin-bottom: 2rem;
+  }
+
+  /* ── QUIÉNES SOMOS ── */
+  #quienes {
+    background: var(--cafe-negro);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #quienes::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(92,51,23,0.3) 0%, transparent 70%);
+  }
+
+  #quienes .section-title { color: var(--crema); }
+
+  .quienes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .quienes-text p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: rgba(245,230,211,0.85);
+    margin-bottom: 1.5rem;
+  }
+
+  .quienes-text p strong {
+    color: var(--dorado);
+    font-weight: 500;
+  }
+
+  .quienes-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .inga-symbol {
+    width: 280px;
+    height: 280px;
+    opacity: 0.85;
+  }
+
+  /* ── MISIÓN VISIÓN VALORES ── */
+  #mvv {
+    background: var(--crema-suave);
+    position: relative;
+  }
+
+  .mvv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .mvv-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-top: 3px solid var(--dorado);
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .mvv-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(92,51,23,0.12);
+  }
+
+  .mvv-card-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1.5rem;
+  }
+
+  .mvv-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--cafe-oscuro);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .mvv-card p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #5a4a3a;
+  }
+
+  .valores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .valor-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.2rem;
+    background: white;
+    border-left: 3px solid var(--dorado);
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.05rem;
+    color: var(--cafe-oscuro);
+    transition: background 0.3s;
+  }
+
+  .valor-item:hover { background: var(--crema); }
+
+  .valor-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--dorado);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── PRODUCTOS ── */
+  #productos {
+    background: var(--cafe-negro);
+    position: relative;
+  }
+
+  #productos .section-title { color: var(--crema); }
+  #productos .section-label { color: var(--dorado); }
+
+  .productos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .producto-card {
+    background: var(--cafe-oscuro);
+    border: 1px solid rgba(201,162,39,0.15);
+    overflow: hidden;
+    transition: all 0.4s;
+    position: relative;
+  }
+
+  .producto-card:hover {
+    border-color: rgba(201,162,39,0.5);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+
+  .producto-visual {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .producto-card:nth-child(1) .producto-visual {
+    background: linear-gradient(135deg, #3d2010, #1a0f08);
+  }
+  .producto-card:nth-child(2) .producto-visual {
+    background: linear-gradient(135deg, #2d1810, #4a2a15);
+  }
+  .producto-card:nth-child(3) .producto-visual {
+    background: linear-gradient(135deg, #1a2a1a, #2d3a1a);
+  }
+  .producto-card:nth-child(4) .producto-visual {
+    background: linear-gradient(135deg, #2a1a08, #3d2a10);
+  }
+
+  .producto-icon {
+    width: 100px;
+    height: 100px;
+    opacity: 0.9;
+  }
+
+  .producto-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--dorado);
+    color: var(--cafe-negro);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+  }
+
+  .producto-info {
+    padding: 1.5rem;
+  }
+
+  .producto-info h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--crema);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .producto-info p {
+    color: rgba(245,230,211,0.65);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .producto-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
+  }
+
+  .tag {
+    background: rgba(201,162,39,0.15);
+    color: var(--dorado);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid rgba(201,162,39,0.25);
+  }
+
+  .btn-comprar {
+    display: inline-block;
+    background: transparent;
+    color: var(--dorado);
+    border: 1px solid var(--dorado);
+    padding: 0.6rem 1.4rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .btn-comprar:hover {
+    background: var(--dorado);
+    color: var(--cafe-negro);
+  }
+
+  /* ── PROCESO ── */
+  #proceso {
+    background: var(--crema-suave);
+    position: relative;
+  }
+
+  .proceso-steps {
+    display: flex;
+    gap: 0;
+    margin-top: 3rem;
+    position: relative;
+  }
+
+  .proceso-steps::before {
+    content: '';
+    position: absolute;
+    top: 35px;
+    left: 5%;
+    right: 5%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--dorado), var(--dorado), transparent);
+    opacity: 0.3;
+  }
+
+  .paso {
+    flex: 1;
+    text-align: center;
+    padding: 0 0.8rem;
+    position: relative;
+  }
+
+  .paso-num {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid var(--dorado);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s;
+  }
+
+  .paso:hover .paso-num {
+    background: var(--cafe-negro);
+    border-color: var(--dorado);
+  }
+
+  .paso-num svg { width: 30px; height: 30px; }
+
+  .paso h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--cafe-oscuro);
+    margin-bottom: 0.5rem;
+  }
+
+  .paso p {
+    font-size: 0.85rem;
+    color: #7a6a5a;
+    line-height: 1.5;
+  }
+
+  /* ── IMPACTO ── */
+  #impacto {
+    background: var(--verde-inga);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #impacto::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(201,162,39,0.08) 0%, transparent 60%);
+  }
+
+  #impacto .section-title { color: var(--crema); }
+  #impacto .section-label { color: var(--dorado-claro); }
+
+  .impacto-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .impacto-item {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s;
+  }
+
+  .impacto-item:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(201,162,39,0.4);
+    transform: translateY(-5px);
+  }
+
+  .impacto-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--dorado);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .impacto-item h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--crema);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+  }
+
+  .impacto-item p {
+    font-size: 0.9rem;
+    color: rgba(245,230,211,0.6);
+    line-height: 1.6;
+  }
+
+  .impacto-pillars {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .pillar {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.04);
+    border-left: 3px solid var(--dorado);
+  }
+
+  .pillar-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .pillar h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--crema);
+    margin-bottom: 0.4rem;
+  }
+
+  .pillar p {
+    font-size: 0.88rem;
+    color: rgba(245,230,211,0.6);
+    line-height: 1.6;
+  }
+
+  /* ── TESTIMONIOS ── */
+  #testimonios {
+    background: var(--blanco-calido);
+    position: relative;
+  }
+
+  .testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .testimonio {
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(92,51,23,0.1);
+    position: relative;
+    transition: all 0.3s;
+    background: white;
+  }
+
+  .testimonio:hover {
+    border-color: var(--dorado);
+    box-shadow: 0 15px 40px rgba(92,51,23,0.08);
+    transform: translateY(-5px);
+  }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--dorado);
+    line-height: 0.8;
+    margin-bottom: 1rem;
+    opacity: 0.4;
+  }
+
+  .testimonio p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--cafe-oscuro);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonio-author {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--cafe-oscuro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    color: var(--dorado);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .author-info span:first-child {
+    display: block;
+    font-family: 'Crimson Pro', serif;
+    font-weight: 500;
+    color: var(--cafe-oscuro);
+  }
+
+  .author-info span:last-child {
+    font-size: 0.82rem;
+    color: var(--cafe-claro);
+    font-style: italic;
+  }
+
+  .stars {
+    color: var(--dorado);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+
+  /* ── TIENDA ── */
+  #tienda {
+    background: var(--cafe-negro);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #tienda::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(92,51,23,0.3) 0%, transparent 70%);
+  }
+
+  #tienda .section-title { color: var(--crema); }
+
+  .tienda-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .tienda-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: rgba(245,230,211,0.7);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+  }
+
+  .tienda-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .tienda-option {
+    padding: 2rem 1rem;
+    border: 1px solid rgba(201,162,39,0.2);
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .tienda-option:hover {
+    border-color: var(--dorado);
+    background: rgba(201,162,39,0.08);
+    transform: translateY(-5px);
+  }
+
+  .tienda-option svg {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1rem;
+  }
+
+  .tienda-option h4 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--crema);
+    font-size: 1rem;
+    letter-spacing: 1px;
+  }
+
+  .tienda-option p {
+    font-size: 0.82rem;
+    color: rgba(245,230,211,0.5);
+    margin-top: 0.3rem;
+  }
+
+  .tienda-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-whatsapp {
+    background: #25D366;
+    color: white;
+    padding: 0.9rem 2rem;
+    border: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+  }
+
+  .btn-whatsapp:hover { background: #20ba58; transform: translateY(-2px); }
+
+  /* ── REDES SOCIALES ── */
+  #redes {
+    background: var(--crema-suave);
+    text-align: center;
+  }
+
+  .redes-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .red-social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 2rem 2.5rem;
+    background: white;
+    border: 1px solid rgba(92,51,23,0.08);
+    text-decoration: none;
+    color: var(--cafe-oscuro);
+    transition: all 0.3s;
+    min-width: 130px;
+  }
+
+  .red-social:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(92,51,23,0.12); }
+
+  .red-social.ig:hover { border-color: #e1306c; }
+  .red-social.fb:hover { border-color: #1877f2; }
+  .red-social.tk:hover { border-color: #000000; }
+  .red-social.wa:hover { border-color: #25D366; }
+
+  .red-social svg { width: 36px; height: 36px; }
+  .red-social span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ── CONTACTO ── */
+  #contacto {
+    background: var(--cafe-negro);
+    position: relative;
+  }
+
+  #contacto .section-title { color: var(--crema); }
+
+  .contacto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+    margin-top: 3rem;
+  }
+
+  .contacto-info-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+
+  .contacto-icon {
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(201,162,39,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contacto-icon svg { width: 20px; height: 20px; }
+
+  .contacto-info-item h4 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--dorado);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .contacto-info-item p, .contacto-info-item a {
+    color: rgba(245,230,211,0.75);
+    font-size: 0.95rem;
+    text-decoration: none;
+    line-height: 1.6;
+  }
+
+  .contacto-info-item a:hover { color: var(--dorado); }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,162,39,0.2);
+    color: var(--crema);
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: rgba(245,230,211,0.3);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--dorado);
+    background: rgba(255,255,255,0.06);
+  }
+
+  .form-group textarea { height: 120px; resize: vertical; }
+
+  .form-group select { color: rgba(245,230,211,0.6); }
+  .form-group select option { background: var(--cafe-oscuro); color: var(--crema); }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0d0804;
+    padding: 4rem 2rem 2rem;
+    border-top: 1px solid rgba(201,162,39,0.15);
+  }
+
+  .footer-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: rgba(245,230,211,0.5);
+    margin-top: 1rem;
+  }
+
+  .footer-col h5 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--dorado);
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul li a {
+    color: rgba(245,230,211,0.5);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  .footer-col ul li a:hover { color: var(--dorado); }
+
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-bottom p {
+    color: rgba(245,230,211,0.3);
+    font-size: 0.82rem;
+  }
+
+  .footer-bottom a { color: rgba(245,230,211,0.3); text-decoration: none; }
+  .footer-bottom a:hover { color: var(--dorado); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in-delay-1 { transition-delay: 0.1s; }
+  .fade-in-delay-2 { transition-delay: 0.2s; }
+  .fade-in-delay-3 { transition-delay: 0.3s; }
+  .fade-in-delay-4 { transition-delay: 0.4s; }
+  .fade-in-delay-5 { transition-delay: 0.5s; }
+
+  /* ── MOBILE NAV ── */
+  .nav-mobile {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: rgba(26,15,8,0.98);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(201,162,39,0.2);
+    z-index: 999;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-mobile.open { display: flex; }
+  .nav-mobile a {
+    color: var(--crema);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .quienes-grid { grid-template-columns: 1fr; }
+    .quienes-symbol { display: none; }
+    .mvv-grid { grid-template-columns: 1fr; }
+    .valores-grid { grid-template-columns: 1fr 1fr; }
+    .productos-grid { grid-template-columns: 1fr; }
+    .impacto-grid { grid-template-columns: repeat(2, 1fr); }
+    .impacto-pillars { grid-template-columns: 1fr; }
+    .testimonios-grid { grid-template-columns: 1fr; }
+    .tienda-options { grid-template-columns: repeat(2, 1fr); }
+    .contacto-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .proceso-steps { flex-direction: column; gap: 2rem; }
+    .proceso-steps::before { display: none; }
+  }
+
+  @media (max-width: 560px) {
+    section { padding: 4rem 1.2rem; }
+    .valores-grid { grid-template-columns: 1fr; }
+    .impacto-grid { grid-template-columns: 1fr; }
+    .tienda-options { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-col:nth-child(3), .footer-col:nth-child(4) { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+
+  /* Notification */
+  #notif {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--dorado);
+    color: var(--cafe-negro);
+    padding: 1rem 1.5rem;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    z-index: 9999;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.4s ease;
+    max-width: 300px;
+    border-left: 4px solid var(--cafe-oscuro);
+  }
+  #notif.show { transform: translateY(0); opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#inicio" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="19" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+      <path d="M12 28 Q20 10 28 28" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+      <circle cx="20" cy="20" r="4" fill="#c9a227" opacity="0.4"/>
+      <path d="M16 20 Q20 14 24 20" stroke="#c9a227" stroke-width="1" fill="none"/>
+      <circle cx="20" cy="20" r="1.5" fill="#c9a227"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span>Iachaikuna Kusni</span>
+      <span>Café de los Sabios</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#quienes">Nosotros</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#impacto">Impacto</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#tienda" class="nav-cta">Tienda</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="nav-mobile" id="nav-mobile">
+  <a href="#quienes" onclick="closeMobileNav()">Nosotros</a>
+  <a href="#mvv" onclick="closeMobileNav()">Misión & Visión</a>
+  <a href="#productos" onclick="closeMobileNav()">Productos</a>
+  <a href="#proceso" onclick="closeMobileNav()">Proceso</a>
+  <a href="#impacto" onclick="closeMobileNav()">Impacto</a>
+  <a href="#testimonios" onclick="closeMobileNav()">Testimonios</a>
+  <a href="#tienda" onclick="closeMobileNav()">Tienda</a>
+  <a href="#contacto" onclick="closeMobileNav()">Contacto</a>
+</div>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-bg"></div>
+  <div class="grain"></div>
+  <svg class="hero-rings" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="210" cy="210" r="180" stroke-width="1" stroke-dasharray="8 6"/>
+    <circle cx="210" cy="210" r="130" stroke-width="0.8" stroke-dasharray="4 8"/>
+    <circle cx="210" cy="210" r="80" stroke-width="1.2" stroke-dasharray="12 4"/>
+    <circle cx="210" cy="210" r="40" stroke-width="1"/>
+    <path d="M210 30 L214 50 L210 46 L206 50Z" fill="#c9a227" opacity="0.4"/>
+    <circle cx="210" cy="210" r="8" fill="#c9a227" opacity="0.3"/>
+  </svg>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Aponte, Nariño — Colombia</p>
+    <h1 class="hero-title">Iachaikuna <em>Kusni</em></h1>
+    <p class="hero-subtitle">Café de los Sabios · Pueblo Inga</p>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">"Más que café, una herencia ancestral<br>en cada taza."</p>
+    <div class="hero-buttons">
+      <a href="#tienda" class="btn-primary">Comprar Ahora</a>
+      <a href="#quienes" class="btn-secondary">Conoce Nuestra Historia</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span></span>
+    Descubrir
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section id="quienes">
+  <div class="section-container">
+    <div class="quienes-grid">
+      <div class="quienes-text fade-in">
+        <span class="section-label">Nuestra Identidad</span>
+        <h2 class="section-title">¿Quiénes <em>Somos?</em></h2>
+        <div class="section-divider"></div>
+        <p><strong>Iachaikuna Kusni</strong> es un emprendimiento de café especial nacido en el resguardo indígena de Aponte, Nariño.</p>
+        <p>Combinamos la <strong>sabiduría ancestral del pueblo Inga</strong> con prácticas sostenibles para ofrecer un café premium de alta calidad y origen cultural único.</p>
+        <p>Iachaikuna Kusni nace como una iniciativa que une la sabiduría de nuestros mayores con la producción de café especial. Inspirados en el respeto por la <strong>Pacha Mama</strong> y las tradiciones heredadas, cultivamos café bajo prácticas sostenibles que protegen la biodiversidad y fortalecen nuestra identidad cultural.</p>
+        <p>Más que vender café, compartimos cultura, tradición y el esfuerzo de una comunidad que trabaja por preservar sus raíces y construir un futuro sostenible.</p>
+      </div>
+      <div class="quienes-symbol fade-in fade-in-delay-3">
+        <svg class="inga-symbol" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Inga-inspired geometric symbol -->
+          <circle cx="140" cy="140" r="130" stroke="#c9a227" stroke-width="1" opacity="0.3"/>
+          <circle cx="140" cy="140" r="100" stroke="#c9a227" stroke-width="0.8" opacity="0.2"/>
+          <!-- Solar cross -->
+          <line x1="140" y1="20" x2="140" y2="260" stroke="#c9a227" stroke-width="1" opacity="0.4"/>
+          <line x1="20" y1="140" x2="260" y2="140" stroke="#c9a227" stroke-width="1" opacity="0.4"/>
+          <!-- Diamond -->
+          <path d="M140 60 L200 140 L140 220 L80 140Z" stroke="#c9a227" stroke-width="1.5" fill="none" opacity="0.6"/>
+          <!-- Coffee leaf shapes -->
+          <path d="M140 90 Q165 115 140 140 Q115 115 140 90Z" fill="#c9a227" opacity="0.3"/>
+          <path d="M140 190 Q165 165 140 140 Q115 165 140 190Z" fill="#c9a227" opacity="0.3"/>
+          <path d="M90 140 Q115 115 140 140 Q115 165 90 140Z" fill="#c9a227" opacity="0.3"/>
+          <path d="M190 140 Q165 115 140 140 Q165 165 190 140Z" fill="#c9a227" opacity="0.3"/>
+          <!-- Center -->
+          <circle cx="140" cy="140" r="16" fill="#c9a227" opacity="0.7"/>
+          <circle cx="140" cy="140" r="8" fill="#2d1810"/>
+          <circle cx="140" cy="140" r="4" fill="#c9a227"/>
+          <!-- Dots at compass points -->
+          <circle cx="140" cy="40" r="4" fill="#c9a227" opacity="0.5"/>
+          <circle cx="140" cy="240" r="4" fill="#c9a227" opacity="0.5"/>
+          <circle cx="40" cy="140" r="4" fill="#c9a227" opacity="0.5"/>
+          <circle cx="240" cy="140" r="4" fill="#c9a227" opacity="0.5"/>
+          <!-- Decorative spirals -->
+          <path d="M110 110 Q120 100 130 110 Q120 120 110 110Z" stroke="#c9a227" stroke-width="1" fill="none" opacity="0.4"/>
+          <path d="M170 110 Q180 100 170 110 Q160 120 170 110Z" stroke="#c9a227" stroke-width="1" fill="none" opacity="0.4"/>
+          <path d="M110 170 Q100 160 110 170 Q120 180 110 170Z" stroke="#c9a227" stroke-width="1" fill="none" opacity="0.4"/>
+          <path d="M170 170 Q180 160 170 170 Q160 180 170 170Z" stroke="#c9a227" stroke-width="1" fill="none" opacity="0.4"/>
+          <!-- Text arc suggestion -->
+          <path id="arc1" d="M60 140 A80 80 0 0 1 220 140" fill="none"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISIÓN VISIÓN VALORES -->
+<section id="mvv">
+  <div class="section-container">
+    <div class="fade-in">
+      <span class="section-label">Nuestros Principios</span>
+      <h2 class="section-title">Misión, Visión <em>&amp; Valores</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="mvv-grid">
+      <div class="mvv-card fade-in fade-in-delay-1">
+        <svg class="mvv-card-icon" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="25" cy="25" r="22" stroke="#c9a227" stroke-width="1.5"/>
+          <path d="M25 12 L28 20 L37 20 L30 26 L33 35 L25 29 L17 35 L20 26 L13 20 L22 20Z" fill="#c9a227" opacity="0.6"/>
+        </svg>
+        <h3>Misión</h3>
+        <p>Producir y comercializar café especial de alta calidad, cultivado bajo prácticas sostenibles y ancestrales del pueblo Inga, promoviendo el desarrollo económico de nuestra comunidad, el cuidado de la Pacha Mama y la preservación de nuestra identidad cultural.</p>
+      </div>
+      <div class="mvv-card fade-in fade-in-delay-2">
+        <svg class="mvv-card-icon" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M25 5 Q38 12 38 28 Q38 42 25 46 Q12 42 12 28 Q12 12 25 5Z" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+          <circle cx="25" cy="26" r="8" fill="#c9a227" opacity="0.4"/>
+          <circle cx="25" cy="26" r="3" fill="#c9a227"/>
+        </svg>
+        <h3>Visión</h3>
+        <p>Ser una empresa reconocida a nivel nacional e internacional por ofrecer café especial con identidad indígena, destacándose por su calidad, sostenibilidad y compromiso social con las comunidades caficultoras de Aponte, Nariño.</p>
+      </div>
+      <div class="mvv-card fade-in fade-in-delay-3">
+        <svg class="mvv-card-icon" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M25 8 L27 16 L35 14 L30 21 L37 25 L29 27 L31 35 L25 30 L19 35 L21 27 L13 25 L20 21 L15 14 L23 16Z" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+          <circle cx="25" cy="25" r="5" fill="#c9a227" opacity="0.5"/>
+        </svg>
+        <h3>Valores</h3>
+        <div class="valores-grid" style="margin-top:1rem;">
+          <div class="valor-item"><div class="valor-dot"></div>Sostenibilidad ambiental</div>
+          <div class="valor-item"><div class="valor-dot"></div>Comercio justo</div>
+          <div class="valor-item"><div class="valor-dot"></div>Respeto por la cultura Inga</div>
+          <div class="valor-item"><div class="valor-dot"></div>Calidad y excelencia</div>
+          <div class="valor-item"><div class="valor-dot"></div>Trabajo comunitario</div>
+          <div class="valor-item"><div class="valor-dot"></div>Responsabilidad social</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <div class="section-container">
+    <div class="fade-in">
+      <span class="section-label">Selección Especial</span>
+      <h2 class="section-title">Nuestros <em>Productos</em></h2>
+      <div class="section-divider" style="background: var(--dorado);"></div>
+    </div>
+    <div class="productos-grid">
+      <div class="producto-card fade-in fade-in-delay-1">
+        <div class="producto-visual">
+          <svg class="producto-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="25" y="30" width="50" height="65" rx="3" stroke="#c9a227" stroke-width="2" fill="rgba(201,162,39,0.1)"/>
+            <path d="M35 30 Q50 10 65 30" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+            <rect x="35" y="48" width="30" height="2" fill="#c9a227" opacity="0.6"/>
+            <rect x="35" y="55" width="25" height="1.5" fill="#c9a227" opacity="0.4"/>
+            <rect x="35" y="61" width="20" height="1.5" fill="#c9a227" opacity="0.4"/>
+            <circle cx="50" cy="38" r="6" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+          </svg>
+          <span class="producto-badge">Premium</span>
+        </div>
+        <div class="producto-info">
+          <h3>Café Especial Molido</h3>
+          <p>Perfecto para preparar en casa. Molido artesanalmente para preservar cada nota aromática.</p>
+          <div class="producto-tags">
+            <span class="tag">250g</span>
+            <span class="tag">500g</span>
+            <span class="tag">Molido fino</span>
+          </div>
+          <a href="#tienda" class="btn-comprar">Pedir por WhatsApp</a>
+        </div>
+      </div>
+      <div class="producto-card fade-in fade-in-delay-2">
+        <div class="producto-visual">
+          <svg class="producto-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Coffee beans -->
+            <ellipse cx="35" cy="45" rx="12" ry="18" stroke="#c9a227" stroke-width="2" fill="rgba(201,162,39,0.1)" transform="rotate(-20 35 45)"/>
+            <line x1="35" y1="30" x2="35" y2="60" stroke="#c9a227" stroke-width="1" opacity="0.5" transform="rotate(-20 35 45)"/>
+            <ellipse cx="60" cy="50" rx="12" ry="18" stroke="#c9a227" stroke-width="2" fill="rgba(201,162,39,0.1)" transform="rotate(15 60 50)"/>
+            <line x1="60" y1="35" x2="60" y2="65" stroke="#c9a227" stroke-width="1" opacity="0.5" transform="rotate(15 60 50)"/>
+            <ellipse cx="48" cy="68" rx="10" ry="16" stroke="#c9a227" stroke-width="1.5" fill="rgba(201,162,39,0.08)" transform="rotate(5 48 68)"/>
+          </svg>
+          <span class="producto-badge">Origen</span>
+        </div>
+        <div class="producto-info">
+          <h3>Café en Grano</h3>
+          <p>Granos seleccionados a mano en las alturas de Aponte. Para quienes aprecian moler su propio café.</p>
+          <div class="producto-tags">
+            <span class="tag">250g</span>
+            <span class="tag">500g</span>
+            <span class="tag">Grano entero</span>
+          </div>
+          <a href="#tienda" class="btn-comprar">Pedir por WhatsApp</a>
+        </div>
+      </div>
+      <div class="producto-card fade-in fade-in-delay-3">
+        <div class="producto-visual">
+          <svg class="producto-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Gift / pack -->
+            <rect x="20" y="45" width="60" height="45" rx="2" stroke="#a8d8a8" stroke-width="2" fill="rgba(168,216,168,0.1)"/>
+            <rect x="20" y="35" width="60" height="15" rx="2" stroke="#a8d8a8" stroke-width="2" fill="rgba(168,216,168,0.15)"/>
+            <line x1="50" y1="35" x2="50" y2="90" stroke="#a8d8a8" stroke-width="1.5"/>
+            <path d="M50 35 Q38 22 32 28 Q26 34 38 35" stroke="#a8d8a8" stroke-width="1.5" fill="none"/>
+            <path d="M50 35 Q62 22 68 28 Q74 34 62 35" stroke="#a8d8a8" stroke-width="1.5" fill="none"/>
+          </svg>
+          <span class="producto-badge">Eco</span>
+        </div>
+        <div class="producto-info">
+          <h3>Pack Eco Premium</h3>
+          <p>Combinación de molido y grano en empaque ecológico 100% biodegradable. Ideal como regalo.</p>
+          <div class="producto-tags">
+            <span class="tag">Edición limitada</span>
+            <span class="tag">Eco-pack</span>
+          </div>
+          <a href="#tienda" class="btn-comprar">Pedir por WhatsApp</a>
+        </div>
+      </div>
+      <div class="producto-card fade-in fade-in-delay-4">
+        <div class="producto-visual">
+          <svg class="producto-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Subscription box -->
+            <path d="M20 50 L50 35 L80 50 L80 80 L50 95 L20 80Z" stroke="#e8c547" stroke-width="2" fill="rgba(232,197,71,0.08)"/>
+            <path d="M20 50 L50 65 L80 50" stroke="#e8c547" stroke-width="1.5" fill="none"/>
+            <line x1="50" y1="65" x2="50" y2="95" stroke="#e8c547" stroke-width="1.5"/>
+            <path d="M35 42 L50 35 L65 42" stroke="#e8c547" stroke-width="1.5" fill="none"/>
+          </svg>
+          <span class="producto-badge">Envíos</span>
+        </div>
+        <div class="producto-info">
+          <h3>Envíos Nacionales</h3>
+          <p>Llevamos el café de los sabios hasta tu puerta en cualquier rincón de Colombia.</p>
+          <div class="producto-tags">
+            <span class="tag">Todo Colombia</span>
+            <span class="tag">Rápido y seguro</span>
+          </div>
+          <a href="#contacto" class="btn-comprar">Consultar envío</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="section-container">
+    <div class="fade-in" style="text-align:center; max-width:600px; margin:0 auto 0;">
+      <span class="section-label">De la Tierra a Tu Taza</span>
+      <h2 class="section-title">Proceso de <em>Producción</em></h2>
+      <div class="section-divider" style="margin: 0 auto 0;"></div>
+    </div>
+    <div class="proceso-steps">
+      <div class="paso fade-in fade-in-delay-1">
+        <div class="paso-num">
+          <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 5 Q22 10 22 18 Q22 25 15 26 Q8 25 8 18 Q8 10 15 5Z" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+            <path d="M15 12 Q18 15 15 18 Q12 15 15 12Z" fill="#c9a227" opacity="0.5"/>
+          </svg>
+        </div>
+        <h4>Recolección Manual</h4>
+        <p>Cosecha selectiva grano a grano en las laderas de Aponte</p>
+      </div>
+      <div class="paso fade-in fade-in-delay-2">
+        <div class="paso-num">
+          <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="15" cy="15" r="8" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+            <path d="M10 15 L13 18 L20 11" stroke="#c9a227" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h4>Selección del Grano</h4>
+        <p>Clasificación rigurosa para garantizar solo los mejores granos</p>
+      </div>
+      <div class="paso fade-in fade-in-delay-3">
+        <div class="paso-num">
+          <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 8 L22 8 L22 22 L8 22Z" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+            <path d="M11 14 Q15 10 19 14 Q15 18 11 14Z" fill="#c9a227" opacity="0.5"/>
+          </svg>
+        </div>
+        <h4>Despulpado y Secado</h4>
+        <p>Proceso tradicional que realza las notas aromáticas naturales</p>
+      </div>
+      <div class="paso fade-in fade-in-delay-4">
+        <div class="paso-num">
+          <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 22 Q10 10 15 8 Q20 10 20 22" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+            <path d="M13 22 Q13 16 15 14 Q17 16 17 22" fill="#c9a227" opacity="0.4"/>
+            <line x1="8" y1="22" x2="22" y2="22" stroke="#c9a227" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h4>Tostión Artesanal</h4>
+        <p>Tostado lento que desarrolla el perfil de sabor único del café Inga</p>
+      </div>
+      <div class="paso fade-in fade-in-delay-5">
+        <div class="paso-num">
+          <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="14" height="18" rx="1" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+            <path d="M11 6 Q15 4 19 6" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+            <line x1="11" y1="14" x2="19" y2="14" stroke="#c9a227" stroke-width="1"/>
+            <line x1="11" y1="17" x2="17" y2="17" stroke="#c9a227" stroke-width="1"/>
+          </svg>
+        </div>
+        <h4>Empaque Ecológico</h4>
+        <p>Envasado en materiales biodegradables que protegen el planeta</p>
+      </div>
+      <div class="paso fade-in fade-in-delay-5">
+        <div class="paso-num">
+          <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 20 L12 12 L18 16 L25 8" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+            <path d="M22 8 L25 8 L25 11" stroke="#c9a227" stroke-width="1.5"/>
+            <line x1="5" y1="23" x2="25" y2="23" stroke="#c9a227" stroke-width="1"/>
+          </svg>
+        </div>
+        <h4>Distribución</h4>
+        <p>Envíos nacionales directos desde Aponte hasta tu hogar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACTO -->
+<section id="impacto">
+  <div class="section-container">
+    <div class="fade-in">
+      <span class="section-label">Nuestro Compromiso</span>
+      <h2 class="section-title">Impacto Social <em>&amp; Ambiental</em></h2>
+      <div class="section-divider" style="background: var(--dorado);"></div>
+    </div>
+    <div class="impacto-grid">
+      <div class="impacto-item fade-in fade-in-delay-1">
+        <span class="impacto-num">∞</span>
+        <h4>Saberes Ancestrales</h4>
+        <p>Preservamos las tradiciones milenarias del pueblo Inga en cada proceso</p>
+      </div>
+      <div class="impacto-item fade-in fade-in-delay-2">
+        <span class="impacto-num">🌿</span>
+        <h4>Producción Sostenible</h4>
+        <p>Cultivamos respetando la biodiversidad y los ciclos naturales</p>
+      </div>
+      <div class="impacto-item fade-in fade-in-delay-3">
+        <span class="impacto-num">♥</span>
+        <h4>Familias Caficultoras</h4>
+        <p>Apoyamos directamente a las familias de la comunidad Inga de Aponte</p>
+      </div>
+    </div>
+    <div class="impacto-pillars">
+      <div class="pillar fade-in fade-in-delay-1">
+        <svg class="pillar-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 5 Q30 12 30 22 Q30 32 20 36 Q10 32 10 22 Q10 12 20 5Z" stroke="#a8d8a8" stroke-width="1.5" fill="none"/>
+          <path d="M20 14 Q24 18 20 22 Q16 18 20 14Z" fill="#a8d8a8" opacity="0.5"/>
+        </svg>
+        <div>
+          <h4>Protección del Medio Ambiente</h4>
+          <p>Nuestras prácticas agrícolas regenerativas protegen los ecosistemas de la región, conservando fuentes de agua y biodiversidad nativa.</p>
+        </div>
+      </div>
+      <div class="pillar fade-in fade-in-delay-2">
+        <svg class="pillar-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="15" r="7" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+          <path d="M8 35 Q8 25 20 25 Q32 25 32 35" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+        </svg>
+        <div>
+          <h4>Fortalecimiento Económico Local</h4>
+          <p>Cada compra fortalece la economía del resguardo indígena de Aponte, generando empleo digno y comercio justo para las familias.</p>
+        </div>
+      </div>
+      <div class="pillar fade-in fade-in-delay-3">
+        <svg class="pillar-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 5 L23 14 L33 14 L25 20 L28 29 L20 23 L12 29 L15 20 L7 14 L17 14Z" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+        </svg>
+        <div>
+          <h4>Preservación Cultural Inga</h4>
+          <p>Mantenemos vivos los saberes, idioma y cosmovisión del pueblo Inga, transmitiendo su herencia a las nuevas generaciones.</p>
+        </div>
+      </div>
+      <div class="pillar fade-in fade-in-delay-4">
+        <svg class="pillar-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="20" width="8" height="15" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+          <rect x="16" y="14" width="8" height="21" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+          <rect x="24" y="8" width="8" height="27" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+        </svg>
+        <div>
+          <h4>Desarrollo Comunitario</h4>
+          <p>Reinvertimos en infraestructura, educación y salud de la comunidad, construyendo un futuro más próspero y sostenible para Aponte.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="section-container">
+    <div class="fade-in" style="text-align:center; max-width:500px; margin:0 auto 0;">
+      <span class="section-label">Voces de Quienes nos Conocen</span>
+      <h2 class="section-title">Lo que Dicen <em>Nuestros Clientes</em></h2>
+      <div class="section-divider" style="margin:0 auto;"></div>
+    </div>
+    <div class="testimonios-grid">
+      <div class="testimonio fade-in fade-in-delay-1">
+        <div class="quote-mark">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Un café con sabor auténtico y una historia increíble detrás. Cada taza me hace sentir conectado con algo más grande que el simple café.</p>
+        <div class="testimonio-author">
+          <div class="author-avatar">M</div>
+          <div class="author-info">
+            <span>María Fernanda</span>
+            <span>Cliente frecuente – Bogotá</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonio fade-in fade-in-delay-2">
+        <div class="quote-mark">"</div>
+        <div class="stars">★★★★★</div>
+        <p>La calidad y el aroma son excepcionales. Nunca había probado un café con ese perfil floral y dulce tan único. Es definitivamente especial.</p>
+        <div class="testimonio-author">
+          <div class="author-avatar">C</div>
+          <div class="author-info">
+            <span>Carlos A.</span>
+            <span>Consumidor frecuente – Medellín</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonio fade-in fade-in-delay-3">
+        <div class="quote-mark">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Me encanta saber que al comprar este café estoy apoyando directamente a una comunidad indígena. El sabor es exquisito y el propósito, hermoso.</p>
+        <div class="testimonio-author">
+          <div class="author-avatar">L</div>
+          <div class="author-info">
+            <span>Laura Quintero</span>
+            <span>Cliente – Pasto, Nariño</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIENDA VIRTUAL -->
+<section id="tienda">
+  <div class="section-container tienda-content">
+    <div class="fade-in">
+      <span class="section-label">Compra Directa</span>
+      <h2 class="section-title">Tienda <em>Virtual</em></h2>
+      <div class="section-divider" style="margin:0 auto;"></div>
+    </div>
+    <p class="tienda-desc">Adquiere nuestro café especial directamente desde Aponte hasta tu hogar. Aceptamos pagos seguros y hacemos envíos a todo Colombia.</p>
+    <div class="tienda-options">
+      <div class="tienda-option fade-in fade-in-delay-1">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="17" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+          <path d="M12 20 L18 26 L28 14" stroke="#c9a227" stroke-width="2"/>
+        </svg>
+        <h4>Café Molido</h4>
+        <p>250g · 500g</p>
+      </div>
+      <div class="tienda-option fade-in fade-in-delay-2">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="20" cy="20" rx="10" ry="15" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+          <line x1="20" y1="8" x2="20" y2="32" stroke="#c9a227" stroke-width="1" opacity="0.5"/>
+        </svg>
+        <h4>Café en Grano</h4>
+        <p>250g · 500g</p>
+      </div>
+      <div class="tienda-option fade-in fade-in-delay-3">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="12" width="24" height="20" rx="1" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+          <path d="M8 18 L32 18" stroke="#c9a227" stroke-width="1"/>
+          <circle cx="14" cy="25" r="3" stroke="#c9a227" stroke-width="1" fill="none"/>
+          <line x1="20" y1="22" x2="28" y2="22" stroke="#c9a227" stroke-width="1"/>
+          <line x1="20" y1="25" x2="26" y2="25" stroke="#c9a227" stroke-width="1"/>
+          <rect x="14" y="8" width="12" height="6" rx="1" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+        </svg>
+        <h4>Pago Seguro</h4>
+        <p>PSE · Nequi · Transferencia</p>
+      </div>
+      <div class="tienda-option fade-in fade-in-delay-4">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 5 L34 14 L34 30 L20 38 L6 30 L6 14Z" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+          <path d="M14 22 L18 26 L26 16" stroke="#c9a227" stroke-width="1.5"/>
+        </svg>
+        <h4>Envíos Nacionales</h4>
+        <p>Todo Colombia</p>
+      </div>
+    </div>
+    <div class="tienda-cta">
+      <a href="https://wa.me/573146892737?text=Hola!%20Quiero%20comprar%20café%20Iachaikuna%20Kusni" target="_blank" class="btn-whatsapp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.116 1.529 5.845L.057 23.5l5.793-1.519A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.8 0-3.49-.465-4.965-1.282l-.356-.207-3.44.902.918-3.352-.231-.372A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Pedir por WhatsApp
+      </a>
+      <a href="mailto:deysibenavides53@gmail.com" class="btn-primary">Escribir un Correo</a>
+    </div>
+  </div>
+</section>
+
+<!-- REDES SOCIALES -->
+<section id="redes">
+  <div class="section-container" style="text-align:center;">
+    <div class="fade-in">
+      <span class="section-label">Síguenos</span>
+      <h2 class="section-title">Nuestras <em>Redes Sociales</em></h2>
+      <div class="section-divider" style="margin:0 auto;"></div>
+    </div>
+    <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:#7a6a5a; max-width:500px; margin: 0 auto 0; line-height:1.8;">Únete a nuestra comunidad y vive la experiencia Inga desde tu pantalla.</p>
+    <div class="redes-grid">
+      <a href="https://instagram.com" target="_blank" class="red-social ig fade-in fade-in-delay-1">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="5" stroke="#e1306c" stroke-width="2"/>
+          <circle cx="12" cy="12" r="5" stroke="#e1306c" stroke-width="2"/>
+          <circle cx="17.5" cy="6.5" r="1.5" fill="#e1306c"/>
+        </svg>
+        <span>Instagram</span>
+      </a>
+      <a href="https://facebook.com" target="_blank" class="red-social fb fade-in fade-in-delay-2">
+        <svg viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        <span>Facebook</span>
+      </a>
+      <a href="https://tiktok.com" target="_blank" class="red-social tk fade-in fade-in-delay-3">
+        <svg viewBox="0 0 24 24" fill="#000000" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.48a8.16 8.16 0 004.78 1.52V7.54a4.86 4.86 0 01-1.01-.85z"/>
+        </svg>
+        <span>TikTok</span>
+      </a>
+      <a href="https://wa.me/573146892737" target="_blank" class="red-social wa fade-in fade-in-delay-4">
+        <svg viewBox="0 0 24 24" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span>WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-container">
+    <div class="fade-in">
+      <span class="section-label">Estamos Aquí</span>
+      <h2 class="section-title">Contáctanos</h2>
+      <div class="section-divider" style="background: var(--dorado);"></div>
+    </div>
+    <div class="contacto-grid">
+      <div>
+        <div class="contacto-info-item fade-in fade-in-delay-1">
+          <div class="contacto-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 2C7.24 2 5 4.24 5 7c0 4.5 5 11 5 11s5-6.5 5-11c0-2.76-2.24-5-5-5zm0 6.5A1.5 1.5 0 1110 5a1.5 1.5 0 010 3.5z" fill="#c9a227"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Ubicación</h4>
+            <p>Resguardo Indígena de Aponte<br>Nariño – Colombia</p>
+          </div>
+        </div>
+        <div class="contacto-info-item fade-in fade-in-delay-2">
+          <div class="contacto-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 5h14a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1z" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+              <path d="M2 6l8 6 8-6" stroke="#c9a227" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Correo Electrónico</h4>
+            <a href="mailto:deysibenavides53@gmail.com">deysibenavides53@gmail.com</a>
+          </div>
+        </div>
+        <div class="contacto-info-item fade-in fade-in-delay-3">
+          <div class="contacto-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.5 2h-2A1.5 1.5 0 003 3.5v1C3 12.784 7.716 18 15.5 18h1A1.5 1.5 0 0018 16.5v-2a1.5 1.5 0 00-1.5-1.5h-2a1.5 1.5 0 00-1.5 1.5v.5c-2.5 0-5-2.5-5-5h.5A1.5 1.5 0 008 8.5v-2A1.5 1.5 0 006.5 5z" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+          <div>
+            <h4>WhatsApp</h4>
+            <a href="https://wa.me/573146892737" target="_blank">+57 314 689 2737</a>
+          </div>
+        </div>
+        <div class="contacto-info-item fade-in fade-in-delay-4">
+          <div class="contacto-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="8" r="3" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+              <path d="M3 17c0-3 3-5 7-5s7 2 7 5" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Fundadores</h4>
+            <p>Deysi Maribel Benavides Narváez<br>Nicolás Janamejoy Estrada</p>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in fade-in-delay-2">
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" placeholder="Tu nombre" required>
+            </div>
+            <div class="form-group">
+              <label>Teléfono</label>
+              <input type="tel" placeholder="Tu teléfono">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Correo Electrónico</label>
+            <input type="email" placeholder="tu@correo.com" required>
+          </div>
+          <div class="form-group">
+            <label>¿Qué te interesa?</label>
+            <select>
+              <option value="">Selecciona una opción</option>
+              <option>Comprar café molido (250g o 500g)</option>
+              <option>Comprar café en grano (250g o 500g)</option>
+              <option>Pack Eco Premium</option>
+              <option>Información de envíos</option>
+              <option>Alianzas comerciales</option>
+              <option>Otra consulta</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mensaje</label>
+            <textarea placeholder="Escribe tu mensaje aquí..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;">Enviar Mensaje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="19" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+          <path d="M12 28 Q20 10 28 28" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+          <circle cx="20" cy="20" r="4" fill="#c9a227" opacity="0.4"/>
+          <circle cx="20" cy="20" r="1.5" fill="#c9a227"/>
+        </svg>
+        <div>
+          <div style="font-family:'Playfair Display',serif;color:#c9a227;font-size:1rem;font-weight:600;">Iachaikuna Kusni</div>
+          <div style="font-family:'Cormorant Garamond',serif;color:rgba(245,230,211,0.5);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;font-style:italic;">Café de los Sabios</div>
+        </div>
+      </div>
+      <p>Nacidos en el resguardo indígena de Aponte, Nariño. Unimos la sabiduría ancestral del pueblo Inga con café especial de alta calidad.</p>
+      <p style="margin-top:0.8rem; font-size:0.82rem;">Aponte, Nariño – Colombia</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navegación</h5>
+      <ul>
+        <li><a href="#quienes">¿Quiénes Somos?</a></li>
+        <li><a href="#mvv">Misión y Visión</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#impacto">Impacto</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Productos</h5>
+      <ul>
+        <li><a href="#tienda">Café Molido 250g</a></li>
+        <li><a href="#tienda">Café Molido 500g</a></li>
+        <li><a href="#tienda">Café en Grano 250g</a></li>
+        <li><a href="#tienda">Café en Grano 500g</a></li>
+        <li><a href="#tienda">Pack Eco Premium</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contacto</h5>
+      <ul>
+        <li><a href="mailto:deysibenavides53@gmail.com">deysibenavides53@gmail.com</a></li>
+        <li><a href="https://wa.me/573146892737" target="_blank">+57 314 689 2737</a></li>
+        <li><a href="#contacto">Formulario de Contacto</a></li>
+        <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+        <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Iachaikuna Kusni – Café de los Sabios. Todos los derechos reservados.</p>
+    <p>Hecho con amor en <a href="#inicio">Aponte, Nariño 🇨🇴</a></p>
+  </div>
+</footer>
+
+<!-- Notification -->
+<div id="notif">✓ ¡Mensaje enviado! Te contactaremos pronto.</div>
+
+<script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navMobile = document.getElementById('nav-mobile');
+  hamburger.addEventListener('click', () => {
+    navMobile.classList.toggle('open');
+  });
+  function closeMobileNav() {
+    navMobile.classList.remove('open');
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 80) {
+      nav.style.background = 'rgba(26,15,8,0.98)';
+    } else {
+      nav.style.background = 'rgba(26,15,8,0.92)';
+    }
+  });
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const notif = document.getElementById('notif');
+    notif.classList.add('show');
+    setTimeout(() => notif.classList.remove('show'), 4000);
+    e.target.reset();
+  }
+
+  // Close mobile nav on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('nav') && !e.target.closest('#nav-mobile')) {
+      closeMobileNav();
+    }
+  });
+</script>
+</body>
+</html>
